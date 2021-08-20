@@ -1,5 +1,6 @@
 package com.example.springsocial.security;
 
+import com.example.springsocial.model.Role;
 import com.example.springsocial.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,33 +8,39 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;
     private String email;
     private String password;
+    private Set<Role> roles;
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
-    public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String email, String password,Set<Role> roles, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.roles=roles;
         this.authorities = authorities;
     }
 
     public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+    	List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
+				.collect(Collectors.toList());
 
         return new UserPrincipal(
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+               user.getRoles()
+               , authorities
         );
     }
 
@@ -46,8 +53,16 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     public Long getId() {
         return id;
     }
+    
+    
 
-    public String getEmail() {
+    public Set<Role> getRoles() {
+		return roles;
+	}
+
+	
+
+	public String getEmail() {
         return email;
     }
 

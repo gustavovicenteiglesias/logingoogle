@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/spring_social?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-        username: root
-        password: callicoder
+        url: jdbc:mysql://areco.gob.ar:3306/spring_social?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        username: oauth
+        password: oauth*
 
     jpa:
         show-sql: true
@@ -17,15 +17,17 @@ spring:
         client:
           registration:
             google:
-              clientId: 5014057553-8gm9um6vnli3cle5rgigcdjpdrid14m9.apps.googleusercontent.com
-              clientSecret: tWZKVLxaD_ARWsriiiUFYoIk
+              #clientId: 532243676933-1sf4vn9ik1gl9074ejr7k6i1nqqd1etv.apps.googleusercontent.com
+              #clientSecret: 18_tv3gamQAR5qA-n00BaUqr
+              clientSecret: h33N9KFOYhXx9djfe2Pm5XWA
+              clientId: 475085457743-n0agbreb867lpldpde8pj0r5n5luvjso.apps.googleusercontent.com
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email
                 - profile
             facebook:
-              clientId: 121189305185277
-              clientSecret: 42ffe5aa7379e8326387e0fe16f34132
+              clientId: 794374974768779  #794374974768779
+              clientSecret:  ff2b5adc4cb3694852d58f49df3c1bb1
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email

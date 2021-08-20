@@ -1,6 +1,9 @@
 package com.example.springsocial.security.oauth2.user;
 
 import java.util.Map;
+import java.util.Set;
+
+import com.example.springsocial.model.Role;
 
 public class FacebookOAuth2UserInfo extends OAuth2UserInfo {
     public FacebookOAuth2UserInfo(Map<String, Object> attributes) {
@@ -35,4 +38,10 @@ public class FacebookOAuth2UserInfo extends OAuth2UserInfo {
         }
         return null;
     }
+
+	@Override
+	public Set<String> getRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,6 +1,9 @@
 package com.example.springsocial.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -25,6 +28,8 @@ public class User {
 
     @Column(nullable = false)
     private Boolean emailVerified = false;
+    
+   
 
     @JsonIgnore
     private String password;
@@ -34,6 +39,22 @@ public class User {
     private AuthProvider provider;
 
     private String providerId;
+    
+    
+    @ManyToMany( fetch = FetchType.EAGER)
+   	@JoinTable(	name = "user_roles", 
+   				joinColumns = @JoinColumn(name = "user_id"), 
+   				inverseJoinColumns = @JoinColumn(name = "role_id"))
+   	private Set<Role> roles = new HashSet<>();
+    
+    public User() {
+	}
+    
+    public User(String name, String email, String password) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
 
     public Long getId() {
         return id;
@@ -98,4 +119,12 @@ public class User {
     public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
+    
+    public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }

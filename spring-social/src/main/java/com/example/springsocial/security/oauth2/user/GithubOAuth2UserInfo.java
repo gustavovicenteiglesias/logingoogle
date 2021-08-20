@@ -1,6 +1,9 @@
 package com.example.springsocial.security.oauth2.user;
 
 import java.util.Map;
+import java.util.Set;
+
+import com.example.springsocial.model.Role;
 
 public class GithubOAuth2UserInfo extends OAuth2UserInfo {
 
@@ -27,4 +30,10 @@ public class GithubOAuth2UserInfo extends OAuth2UserInfo {
     public String getImageUrl() {
         return (String) attributes.get("avatar_url");
     }
+
+	@Override
+	public Set<String> getRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

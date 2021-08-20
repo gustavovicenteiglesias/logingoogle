@@ -1,6 +1,9 @@
 package com.example.springsocial.security.oauth2.user;
 
 import java.util.Map;
+import java.util.Set;
+
+import com.example.springsocial.model.Role;
 
 public abstract class OAuth2UserInfo {
     protected Map<String, Object> attributes;
@@ -20,4 +23,6 @@ public abstract class OAuth2UserInfo {
     public abstract String getEmail();
 
     public abstract String getImageUrl();
+    
+    public abstract Set<String> getRole();
 }

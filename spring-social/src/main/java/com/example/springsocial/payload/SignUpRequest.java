@@ -1,5 +1,7 @@
 package com.example.springsocial.payload;
 
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -14,6 +16,8 @@ public class SignUpRequest {
     @NotBlank
     @Email
     private String email;
+    
+    private Set<String> role;
 
     @NotBlank
     private String password;
@@ -41,4 +45,12 @@ public class SignUpRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public Set<String> getRole() {
+        return this.role;
+      }
+      
+      public void setRole(Set<String> role) {
+        this.role = role;
+      }
 }
